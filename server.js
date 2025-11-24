@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 // API 配置 - 只存在于服务器端，用户看不到
 const API_CONFIG = {
     baseUrl: 'https://dyuapi.com',
-    token: 'sk-xvGZezXPbpiOrzSjNz3E0fQEoKAZ6X6vmPwFXINMeWYHZFRx',
+    token: 'sk-xxxxxxxxxxxxxxxxxxxxxxxx',
     model: 'sora_url'
 };
 
