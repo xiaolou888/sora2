@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 // 建议使用环境变量存储敏感信息
 const API_CONFIG = {
     baseUrl: process.env.API_BASE_URL || 'https://dyuapi.com',
-    token: process.env.API_TOKEN || 'your-api-token-here',  // 👈 请通过环境变量设置或直接替换
+    token: process.env.API_TOKEN || 'sk-xxxxxxxxxxxxxxxxxxxxxxxx',  // 👈 请替换为你的真实 API Token
     model: process.env.API_MODEL || 'sora_url'
 };
 
