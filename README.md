@@ -36,7 +36,7 @@ cp .env.example .env
 
 ```javascript
 const API_CONFIG = {
-    baseUrl: 'https://dyuapi.com',
+    baseUrl: 'https://xxxxxx.com',
     token: '你的API密钥',  // 👈 修改这里
     model: 'sora_url'
 };
