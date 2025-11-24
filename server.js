@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 // API 配置 - 只存在于服务器端，用户看不到
 // 建议使用环境变量存储敏感信息
 const API_CONFIG = {
-    baseUrl: process.env.API_BASE_URL || 'https://dyuapi.com',
+    baseUrl: process.env.API_BASE_URL || 'https://xxxxxx.com',
     token: process.env.API_TOKEN || 'sk-xxxxxxxxxxxxxxxxxxxxxxxx',  // 👈 请替换为你的真实 API Token
     model: process.env.API_MODEL || 'sora_url'
 };
