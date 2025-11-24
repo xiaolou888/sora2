@@ -29,7 +29,6 @@ const videoLoading = document.getElementById('videoLoading');
 const promptCard = document.getElementById('promptCard');
 const promptContent = document.getElementById('promptContent');
 const copyPromptBtn = document.getElementById('copyPromptBtn');
-const qrcodeLink = document.getElementById('qrcodeLink');
 
 // 输入框变化监听
 soraInput.addEventListener('input', (e) => {
@@ -255,11 +254,6 @@ copyPromptBtn.addEventListener('click', async () => {
     } catch (error) {
         console.error('复制失败:', error);
     }
-});
-
-// 二维码链接点击
-qrcodeLink.addEventListener('click', () => {
-    alert('交流群功能暂未开放');
 });
 
 // 显示错误

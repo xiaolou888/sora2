@@ -3,14 +3,22 @@ const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
 
+// 加载环境变量（如果使用 .env 文件）
+try {
+    require('dotenv').config();
+} catch (e) {
+    console.log('未安装 dotenv，将使用默认配置或环境变量');
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // API 配置 - 只存在于服务器端，用户看不到
+// 建议使用环境变量存储敏感信息
 const API_CONFIG = {
-    baseUrl: 'https://dyuapi.com',
-    token: 'sk-xvGZezXPbpiOrzSjNz3E0fQEoKAZ6X6vmPwFXINMeWYHZFRx',
-    model: 'sora_url'
+    baseUrl: process.env.API_BASE_URL || 'https://dyuapi.com',
+    token: process.env.API_TOKEN || 'your-api-token-here',  // 👈 请通过环境变量设置或直接替换
+    model: process.env.API_MODEL || 'sora_url'
 };
 
 // 中间件

@@ -20,6 +20,18 @@ npm install
 
 ### 2. 配置 API 密钥
 
+**方式 1：使用环境变量（推荐，更安全）**
+
+```bash
+# 复制环境变量示例文件
+cp .env.example .env
+
+# 编辑 .env 文件，填入你的 API Token
+# API_TOKEN=your-api-token-here
+```
+
+**方式 2：直接修改 server.js**
+
 编辑 `server.js`，修改 API 配置：
 
 ```javascript
@@ -29,6 +41,8 @@ const API_CONFIG = {
     model: 'sora_url'
 };
 ```
+
+⚠️ **注意**：如果直接修改 server.js，请确保不要将包含真实 API Token 的文件提交到 Git！
 
 ### 3. 启动服务器
 
@@ -203,10 +217,21 @@ PORT=8080 npm start
 ## ⚠️ 安全建议
 
 1. ✅ **永远不要**在前端代码中暴露 API 密钥（本项目已实现）
-2. ✅ **使用 HTTPS** 加密传输（生产环境必须）
-3. ✅ **定期更换** API 密钥
-4. ✅ **监控 API 使用量**，及时发现异常
-5. ✅ **添加访问限制**（可选：IP 白名单、请求频率限制等）
+2. ✅ **使用环境变量**存储敏感信息（推荐使用 .env 文件）
+3. ✅ **不要提交 .env 文件**到 Git（已在 .gitignore 中配置）
+4. ✅ **使用 HTTPS** 加密传输（生产环境必须）
+5. ✅ **定期更换** API 密钥
+6. ✅ **监控 API 使用量**，及时发现异常
+7. ✅ **添加访问限制**（可选：IP 白名单、请求频率限制等）
+
+### 环境变量说明
+
+本项目支持通过环境变量配置敏感信息：
+
+- `API_BASE_URL`: API 服务地址（默认：https://dyuapi.com）
+- `API_TOKEN`: API 访问令牌（必填）
+- `API_MODEL`: API 模型名称（默认：sora_url）
+- `PORT`: 服务器端口（默认：3000）
 
 ## 🛠️ 技术栈
 
