@@ -1,6 +1,8 @@
 # Sora 去水印下载网站
 
 一个安全的 Sora 视频去水印下载工具，通过后端代理保护 API 密钥。
+![img/1.png](https://github.com/xiaolou888/sora2/blob/main/img/1.png)
+![img/2.png](https://github.com/xiaolou888/sora2/blob/main/img/2.png)
 
 ## 🔒 安全设计
 
