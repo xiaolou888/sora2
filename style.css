@@ -334,6 +334,14 @@ h1 {
     color: #fca5a5;
     font-size: 0.875rem;
     line-height: 1.5;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 /* 成功卡片 */

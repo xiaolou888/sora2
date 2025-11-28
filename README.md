@@ -1,8 +1,6 @@
 # Sora 去水印下载网站
 
 一个安全的 Sora 视频去水印下载工具，通过后端代理保护 API 密钥。
-![img/1.png](https://github.com/xiaolou888/sora2/blob/main/img/1.png)
-![img/2.png](https://github.com/xiaolou888/sora2/blob/main/img/2.png)
 
 ## 🔒 安全设计
 
@@ -28,8 +26,10 @@ npm install
 # 复制环境变量示例文件
 cp .env.example .env
 
-# 编辑 .env 文件，填入你的 API Token
+# 编辑 .env 文件，填入你的配置
+# API_BASE_URL=https://xxxxxx.com
 # API_TOKEN=your-api-token-here
+# API_MODEL=sora_url
 ```
 
 **方式 2：直接修改 server.js**
@@ -38,7 +38,7 @@ cp .env.example .env
 
 ```javascript
 const API_CONFIG = {
-    baseUrl: 'https://xxxxxx.com',
+    baseUrl: 'https://xxxxxx.com',  // API 网关地址
     token: '你的API密钥',  // 👈 修改这里
     model: 'sora_url'
 };
@@ -56,11 +56,11 @@ npm start
 npm run dev
 ```
 
-服务器将运行在 `http://localhost:3000`
+服务器将运行在 `http://localhost:4000`
 
 ### 4. 访问网站
 
-打开浏览器访问：`http://localhost:3000`
+打开浏览器访问：`http://localhost:4000`
 
 ## 🚀 生产环境部署
 
@@ -230,10 +230,10 @@ PORT=8080 npm start
 
 本项目支持通过环境变量配置敏感信息：
 
-- `API_BASE_URL`: API 服务地址（默认：https://dyuapi.com）
+- `API_BASE_URL`: API 服务地址（默认：https://xxxxxx.com）
 - `API_TOKEN`: API 访问令牌（必填）
 - `API_MODEL`: API 模型名称（默认：sora_url）
-- `PORT`: 服务器端口（默认：3000）
+- `PORT`: 服务器端口（默认：4000）
 
 ## 🛠️ 技术栈
 

@@ -163,8 +163,9 @@ function showVideo(videoUrl, prompt, thumbnail) {
     // 显示加载状态
     videoLoading.style.display = 'flex';
     
-    // 设置视频源
-    videoPlayer.src = videoUrl;
+    // 使用代理加载视频（解决 HTTP/2 协议错误）
+    const proxyUrl = `/api/proxy-video?url=${encodeURIComponent(videoUrl)}`;
+    videoPlayer.src = proxyUrl;
     
     // 如果有缩略图，设置为 poster
     if (thumbnail) {

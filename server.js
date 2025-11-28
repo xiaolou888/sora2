@@ -11,13 +11,13 @@ try {
 }
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // API 配置 - 只存在于服务器端，用户看不到
 // 建议使用环境变量存储敏感信息
 const API_CONFIG = {
     baseUrl: process.env.API_BASE_URL || 'https://xxxxxx.com',
-    token: process.env.API_TOKEN || 'sk-xxxxxxxxxxxxxxxxxxxxxxxx',  // 👈 请替换为你的真实 API Token
+    token: process.env.API_TOKEN || 'sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',  // 👈 请替换为你的真实 API Token
     model: process.env.API_MODEL || 'sora_url'
 };
 
@@ -45,7 +45,12 @@ app.post('/api/parse-video', async (req, res) => {
             contentToSend = `https://sora.chatgpt.com/p/${url}`;
         }
         
-        console.log('处理请求:', contentToSend);
+        console.log('========== 新请求 ==========');
+        console.log('时间:', new Date().toISOString());
+        console.log('原始输入:', url);
+        console.log('处理后的内容:', contentToSend);
+        console.log('API 地址:', `${API_CONFIG.baseUrl}/v1/chat/completions`);
+        console.log('Token (前10位):', API_CONFIG.token.substring(0, 10) + '...');
         
         // 调用真实的 API（SK 在服务器端，用户看不到）
         const response = await fetch(`${API_CONFIG.baseUrl}/v1/chat/completions`, {
@@ -67,9 +72,12 @@ app.post('/api/parse-video', async (req, res) => {
         });
         
         const responseText = await response.text();
+        console.log('响应状态:', response.status);
+        console.log('响应内容 (前200字符):', responseText.substring(0, 200));
         
         if (!response.ok) {
-            console.error('API 错误:', responseText);
+            console.error('❌ API 错误 - 状态码:', response.status);
+            console.error('完整响应:', responseText);
             let errorMsg = 'API 请求失败';
             try {
                 const errorData = JSON.parse(responseText);
@@ -105,11 +113,44 @@ app.post('/api/parse-video', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('服务器错误:', error);
+        console.error('❌ 服务器错误:', error.message);
+        console.error('错误堆栈:', error.stack);
+        console.error('错误类型:', error.name);
         res.status(500).json({
             success: false,
-            message: '服务器内部错误'
+            message: '服务器内部错误: ' + error.message
         });
+    }
+});
+
+// 视频代理接口（解决 HTTP/2 协议错误）
+app.get('/api/proxy-video', async (req, res) => {
+    try {
+        const { url } = req.query;
+        
+        if (!url) {
+            return res.status(400).send('缺少视频 URL');
+        }
+        
+        console.log('代理视频请求:', url);
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            return res.status(response.status).send('视频获取失败');
+        }
+        
+        // 转发响应头
+        res.setHeader('Content-Type', response.headers.get('content-type') || 'video/mp4');
+        res.setHeader('Content-Length', response.headers.get('content-length'));
+        res.setHeader('Accept-Ranges', 'bytes');
+        
+        // 流式传输视频
+        response.body.pipe(res);
+        
+    } catch (error) {
+        console.error('视频代理错误:', error);
+        res.status(500).send('视频代理失败');
     }
 });
 
